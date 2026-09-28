@@ -1,2 +1,929 @@
 # HimalayanBite
 Organic snacks from uttarakhand
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Himalayan Bites | Har Bite Mein Pahadon Ki Shakti</title>
+  <style>
+    :root {
+      --forest: #1b5e20;
+      --forest-dark: #123f16;
+      --leaf: #2e7d32;
+      --cream: #fbf7ee;
+      --ink: #203029;
+      --muted: #5b665f;
+      --shadow: 0 18px 45px rgba(27, 53, 32, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: var(--ink);
+      background-color: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a:focus-visible {
+      outline: 3px solid #f5c84c;
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 1rem;
+      top: -5rem;
+      z-index: 20;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      background: #ffffff;
+      color: var(--forest-dark);
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    .site-nav {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem;
+      color: #ffffff;
+    }
+
+    .nav-brand {
+      color: #ffffff;
+      font-family: Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.35rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    }
+
+    .nav-links a:hover {
+      color: #ffe28a;
+    }
+
+    /* 3D Hero Section */
+    .hero {
+      position: relative;
+      min-height: 680px;
+      height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      perspective: 1000px;
+      background: linear-gradient(135deg, rgba(16, 53, 21, 0.85), rgba(30, 92, 42, 0.7)),
+                  url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+      overflow: hidden;
+      padding: 5rem 20px 2rem;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: pulseGlow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+      100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.9; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 40px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.1);
+      transform-style: preserve-3d;
+      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .brand-badge {
+      display: inline-block;
+      background: rgba(255, 215, 0, 0.2);
+      border: 1px solid #ffd700;
+      color: #ffd700;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
+      font-family: 'Georgia', serif;
+      color: #fff;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.3);
+      margin-bottom: 15px;
+      opacity: 0;
+      animation: popUpSlide 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 0.2s;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.15rem, 2.8vw, 1.6rem);
+      color: #f1f8e9;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      animation: popUpSlide 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 0.5s;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, #43a047, #1b5e20);
+      color: #ffffff;
+      padding: 16px 40px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 50px;
+      display: inline-block;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: popUpSlide 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 0.8s;
+    }
+
+    .cta-button:hover,
+    .cta-button:focus-visible {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(46, 125, 50, 0.6);
+      background: linear-gradient(135deg, #4caf50, #2e7d32);
+    }
+
+    @keyframes popUpSlide {
+      0% {
+        opacity: 0;
+        transform: translateY(80px) scale(0.85) rotateX(15deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg);
+      }
+    }
+
+    /* Story Section */
+    .story-detailed {
+      background-color: #fbf7ee;
+      padding: 90px 20px;
+      text-align: center;
+    }
+
+    .story-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .story-content h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--forest);
+      margin-bottom: 25px;
+      font-family: 'Georgia', serif;
+    }
+
+    .garland-image-wrapper {
+      margin: 25px auto 35px;
+      max-width: 650px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      border: 4px solid #ffffff;
+    }
+
+    .garland-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .garland-image-wrapper:hover img {
+      transform: scale(1.03);
+    }
+
+    .story-content p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      margin-bottom: 20px;
+      color: var(--muted);
+      text-align: left;
+    }
+
+    /* Ingredients & Nutrition Section */
+    .ingredients-section {
+      background-color: #ffffff;
+      padding: 90px 20px;
+    }
+
+    .content-wrapper {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 45px;
+    }
+
+    .info-box {
+      flex: 1;
+      min-width: 320px;
+      padding: 0.5rem;
+    }
+
+    .info-box h2 {
+      font-size: clamp(1.9rem, 4vw, 2.4rem);
+      color: var(--forest);
+      margin-bottom: 20px;
+      font-family: 'Georgia', serif;
+    }
+
+    .info-box h3 {
+      font-size: 1.5rem;
+      color: #2e7d32;
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
+
+    .info-box ul {
+      list-style: none;
+    }
+
+    .info-box li {
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .bullet-point, .checkmark {
+      color: #2e7d32;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .nutrition-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e8eee8;
+    }
+
+    .nutrition-table th, .nutrition-table td {
+      padding: 15px 20px;
+      text-align: left;
+    }
+
+    .nutrition-table th {
+      background-color: var(--forest);
+      color: #ffffff;
+      font-size: 1.1rem;
+    }
+
+    .nutrition-table td {
+      border-bottom: 1px solid #eee;
+      font-size: 1.05rem;
+    }
+
+    .nutrition-table tr:nth-child(even) {
+      background-color: #fbfbfb;
+    }
+
+    /* Benefits Section */
+    .benefits-section {
+      background-color: #f4f8f3;
+      padding: 90px 20px;
+    }
+
+    .benefits-container {
+      max-width: 1050px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .benefits-container h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--forest);
+      margin-bottom: 15px;
+      font-family: 'Georgia', serif;
+    }
+
+    .benefits-container .subtitle {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 45px;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    .benefit-card {
+      background-color: #ffffff;
+      padding: 32px 24px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      border-top: 4px solid #2e7d32;
+      text-align: left;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .benefit-card h3 {
+      font-size: 1.35rem;
+      color: #1b5e20;
+      margin-bottom: 12px;
+    }
+
+    .benefit-card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* Updated Unboxing & Packaging Section */
+    .unboxing-section {
+      background-color: #ffffff;
+      padding: 90px 20px;
+      text-align: center;
+    }
+
+    .unboxing-section .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .unboxing-section h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--forest);
+      margin-bottom: 15px;
+      font-family: 'Georgia', serif;
+    }
+
+    .unboxing-section p.lead-text {
+      line-height: 1.8;
+      margin-bottom: 50px;
+      font-size: 1.2rem;
+      color: #444;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .unboxing-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .step-card {
+      background: #faf8f4;
+      border-radius: 16px;
+      padding: 35px 25px;
+      text-align: left;
+      position: relative;
+      border: 1px solid #eee5d8;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      background: #1b5e20;
+      color: #ffffff;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .step-card h3 {
+      font-size: 1.35rem;
+      color: #1b5e20;
+      margin-bottom: 12px;
+      font-family: 'Georgia', serif;
+    }
+
+    .step-card p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* Support Section */
+    .support-section {
+      background-color: #fbf7ee;
+      padding: 90px 20px;
+    }
+
+    .support-section .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .support-section h2 {
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      color: var(--forest);
+      margin-bottom: 45px;
+      text-align: center;
+      font-family: 'Georgia', serif;
+    }
+
+    .contact-box, .faq-box {
+      margin-bottom: 40px;
+    }
+
+    .contact-box h3, .faq-box h3 {
+      font-size: 1.6rem;
+      color: #2e7d32;
+      margin-bottom: 18px;
+    }
+
+    .contact-details p {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .contact-details a {
+      color: var(--forest);
+      font-weight: 700;
+      text-underline-offset: 3px;
+    }
+
+    .faq-item {
+      background: #ffffff;
+      padding: 20px 24px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border-left: 4px solid #2e7d32;
+    }
+
+    .faq-item h4 {
+      font-size: 1.25rem;
+      color: #1b5e20;
+      margin-bottom: 8px;
+    }
+
+    .faq-item p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: #144618;
+      color: #ffffff;
+      padding: 60px 20px 25px;
+    }
+
+    .footer-content {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 35px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .footer-section h3 {
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+      color: #a5d6a7;
+    }
+
+    .footer-section p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #e8f5e9;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section ul li a {
+      color: #e8f5e9;
+      text-decoration: none;
+      font-size: 1.05rem;
+      transition: color 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+      color: #a5d6a7;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 20px;
+      font-size: 0.95rem;
+      color: #c8e6c9;
+    }
+
+    @media (max-width: 700px) {
+      .site-nav {
+        align-items: flex-start;
+        padding: 1rem;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.35rem 0.75rem;
+        max-width: 230px;
+      }
+
+      .nav-links a {
+        font-size: 0.75rem;
+      }
+
+      .hero {
+        min-height: 620px;
+      }
+
+      .hero-content {
+        padding: 2rem 1.25rem;
+      }
+
+      .brand-badge {
+        font-size: 0.72rem;
+        letter-spacing: 1px;
+      }
+
+      .story-detailed,
+      .ingredients-section,
+      .benefits-section,
+      .unboxing-section,
+      .support-section {
+        padding: 4.5rem 1rem;
+      }
+
+      .content-wrapper {
+        gap: 2rem;
+      }
+
+      .info-box {
+        min-width: 0;
+      }
+
+      .nutrition-table th,
+      .nutrition-table td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a class="nav-brand" href="#hero">Himalayan Bites</a>
+    <ul class="nav-links">
+      <li><a href="#story">Our story</a></li>
+      <li><a href="#ingredients">Ingredients</a></li>
+      <li><a href="#unboxing">Experience</a></li>
+      <li><a href="#support">Support</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section with 3D Pop & Tilt -->
+  <section class="hero" id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content" id="heroCard">
+      <div class="brand-badge">Himalayan Bites Authentic Treats</div>
+      <h1 class="hero-title">Himalayan Bites</h1>
+      <p class="hero-subtitle">Har Bite Mein Pahadon Ki Shakti</p>
+      <a href="#unboxing" class="cta-button">Experience The Unboxing</a>
+    </div>
+  </section>
+
+  <main id="main-content">
+  <!-- Story Section with Ghughuti Garland Imagery -->
+  <section class="story-detailed" id="story" aria-labelledby="story-title">
+    <div class="story-content">
+      <h2 id="story-title">The Heritage &amp; Tale of Ghugute</h2>
+      
+      <div class="garland-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=80" alt="Traditional Ghughuti Garland and Snacks">
+      </div>
+
+      <p>In the serene valleys of Uttarakhand, the transition into Uttarayan and Makar Sankranti brings forth the joyful festival of Ghughutia. Handcrafted from sweet wheat dough and fragrant jaggery, these golden treats are traditionally braided into beautiful edible garlands.</p>
+      <p>Children proudly wear these garlands of Ghugute, calling upon the crows and birds across snow-clad mountains with the traditional rhyme <em>"Kale Kauva Kale, Ghughuti Mala Khale"</em>. Himalayan Bites brings this rich folkloric warmth straight to your family table in its purest form.</p>
+    </div>
+  </section>
+
+  <!-- Ingredients & Clean Nutrition Section -->
+  <section class="ingredients-section" id="ingredients" aria-labelledby="ingredients-title">
+    <div class="content-wrapper">
+      <div class="info-box">
+        <h2 id="ingredients-title">Key Ingredients</h2>
+        <p>100% natural, honest mountain ingredients under our Himalayan Bites purity label:</p>
+        <ul>
+          <li><span class="bullet-point">✦</span> <strong>Whole Wheat Flour (गेहूँ का आटा):</strong> Coarse, wholesome traditional grain rich in dietary fiber.</li>
+          <li><span class="bullet-point">✦</span> <strong>Pure Mountain Jaggery (शुद्ध गुड़):</strong> Mineral-rich unrefined sweetener.</li>
+          <li><span class="bullet-point">✦</span> <strong>Pure Desi Ghee (शुद्ध देसी घी):</strong> Rich traditional aroma, crunch, and authentic vitality.</li>
+          <li><span class="bullet-point">✦</span> <strong>Fennel Seeds (सौंफ़):</strong> Aromatic hill herbs aiding healthy digestion.</li>
+        </ul>
+
+        <h3>Our Himalayan Bites Guarantee</h3>
+        <ul>
+          <li><span class="checkmark">✓</span> 100% Natural Jaggery (Zero White Sugar)</li>
+          <li><span class="checkmark">✓</span> Free from Artificial Preservatives and Colors</li>
+          <li><span class="checkmark">✓</span> Hygienically Prepared and Sealed for Freshness</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h2>Nutrition Information</h2>
+        <p>Clean nutritional values derived naturally (Approx. Per 100g):</p>
+        <table class="nutrition-table">
+          <thead>
+            <tr>
+              <th>Nutrient Parameter</th>
+              <th>Quantity (Per 100g)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Protein</strong></td>
+              <td>6 - 8 g</td>
+            </tr>
+            <tr>
+              <td><strong>Total Fat</strong></td>
+              <td>12 - 16 g</td>
+            </tr>
+            <tr>
+              <td><strong>Carbohydrates</strong></td>
+              <td>70 - 75 g</td>
+            </tr>
+            <tr>
+              <td><strong>Pure Jaggery (Natural Content)</strong></td>
+              <td>30 - 35 g</td>
+            </tr>
+            <tr>
+              <td><strong>Dietary Fibers</strong></td>
+              <td>4 - 6 g</td>
+            </tr>
+            <tr>
+              <td><strong>Iron</strong></td>
+              <td>2 - 4 mg</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dedicated Benefits Section -->
+  <section class="benefits-section" id="benefits" aria-labelledby="benefits-title">
+    <div class="benefits-container">
+      <h2 id="benefits-title">Wholesome Benefits</h2>
+      <p class="subtitle">Handpicked ingredients combining nutrition, tradition, and guilt-free snacking.</p>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <h3>Whole Wheat Energy</h3>
+          <p>Complex carbohydrates supply enduring stamina for your daily routine while supporting light, healthy digestion.</p>
+        </div>
+
+        <div class="benefit-card">
+          <h3>Natural Iron in Jaggery</h3>
+          <p>Pure, unrefined jaggery naturally assists hemoglobin levels and helps maintain healthy digestive wellness.</p>
+        </div>
+
+        <div class="benefit-card">
+          <h3>Desi Ghee Vitality</h3>
+          <p>Traditional healthy fats aid joint mobility and enable absorption of vital fat-soluble nutrients.</p>
+        </div>
+
+        <div class="benefit-card">
+          <h3>Fennel Seed Comfort</h3>
+          <p>Soothes the gut, refreshes breath, and ensures that evening tea-time snacking feels light on your stomach.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Updated Unboxing Section (Clean Packaging, Labeling, Folklore Card & Sealing) -->
+  <section class="unboxing-section" id="unboxing" aria-labelledby="unboxing-title">
+    <div class="container">
+      <h2 id="unboxing-title">The Himalayan Experience</h2>
+      <p class="lead-text">Opening a box of Himalayan Bites is more than just tasting a snack—it is an authentic journey into Himalayan warmth and heritage.</p>
+      
+      <div class="unboxing-steps-grid">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Clean &amp; Hygienic Pack</h3>
+          <p>Every batch of crunchy Ghugute is carefully packed in clean, moisture-resistant packaging that seals in maximum aroma, crunch, and authentic flavor.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Himalayan Bites Labeling</h3>
+          <p>The package is adorned with our signature Himalayan Bites brand label, certifying complete purity, zero refined sugar, and mountain heritage.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Folklore Story Card Inside</h3>
+          <p>Before closing the box, we gently insert an illustrated folklore greeting card recounting the tale of Prince Ghughuti and the crow garland tradition.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Quality Sealed For You</h3>
+          <p>The gift-style box is securely sealed with our tamper-evident seal, ready to travel straight from our mountain facility to your dining table.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support & FAQs Section -->
+  <section class="support-section" id="support" aria-labelledby="support-title">
+    <div class="container">
+      <h2 id="support-title">Customer Care &amp; FAQs</h2>
+
+      <div class="contact-box">
+        <h3>Himalayan Bites Support Desk</h3>
+        <div class="contact-details">
+          <p><strong>Customer Helpline:</strong> <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a></p>
+          <p><strong>Email Address:</strong> <a href="mailto:support@himalayanbites.in">support@himalayanbites.in</a></p>
+        </div>
+      </div>
+
+      <div class="faq-box">
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-item">
+          <h4>Can Himalayan Bites be paired with evening tea or coffee?</h4>
+          <p>Yes, absolutely! The combination of whole wheat, pure ghee, and jaggery makes it an ideal companion for hot milk tea, green tea, or black coffee during tea break.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Is there any white refined sugar in Himalayan Bites?</h4>
+          <p>No. We strictly adhere to 100% natural, unrefined mountain jaggery (gur) with no chemical additives or refined sweeteners.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What makes this snack suitable for daily snacking?</h4>
+          <p>The high fiber from whole wheat, iron from pure jaggery, and digestive benefits of fennel make it a healthy, wholesome alternative to heavily processed fried snacks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Himalayan Bites</h3>
+        <p>Honoring traditional Himalayan flavors through pure mountain jaggery, whole wheat, and pure desi ghee.</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Quick Navigation</h3>
+        <ul>
+          <li><a href="#story">Our Folklore Story</a></li>
+          <li><a href="#ingredients">Ingredients &amp; Purity</a></li>
+          <li><a href="#benefits">Health Benefits</a></li>
+          <li><a href="#unboxing">Unboxing Experience</a></li>
+          <li><a href="#support">Customer Support &amp; FAQs</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 Himalayan Bites. Har Bite Mein Pahadon Ki Shakti. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript for 3D Tilt Interaction -->
+  <script>
+    const hero = document.getElementById('hero');
+    const heroCard = document.getElementById('heroCard');
+
+    const supportsHover = window.matchMedia('(hover: hover)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (supportsHover && !prefersReducedMotion) {
+      hero.addEventListener('pointermove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        const rotateX = (-y / rect.height) * 10;
+        const rotateY = (x / rect.width) * 10;
+
+        heroCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      hero.addEventListener('pointerleave', () => {
+        heroCard.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      });
+    }
+  </script>
+
+</body>
+</html>
