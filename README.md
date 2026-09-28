@@ -1,6 +1,7 @@
 # HimalayanBite
 Organic snacks from uttarakhand
-<!DOCTYPE html>
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -251,6 +252,21 @@ Organic snacks from uttarakhand
       height: auto;
       display: block;
       transition: transform 0.4s ease;
+    }
+
+    .ingredient-image-wrapper {
+      margin: 1.5rem 0 1.75rem;
+      border: 4px solid #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .ingredient-image-wrapper img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
     }
 
     .garland-image-wrapper:hover img {
@@ -704,7 +720,7 @@ Organic snacks from uttarakhand
       <h2 id="story-title">The Heritage &amp; Tale of Ghugute</h2>
       
       <div class="garland-image-wrapper">
-        <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=80" alt="Traditional Ghughuti Garland and Snacks">
+        <img src="assets/ghughuti-tradition.jpg" alt="Traditional Ghughuti garland with festive snacks and lamps" width="1206" height="880" fetchpriority="high">
       </div>
 
       <p>In the serene valleys of Uttarakhand, the transition into Uttarayan and Makar Sankranti brings forth the joyful festival of Ghughutia. Handcrafted from sweet wheat dough and fragrant jaggery, these golden treats are traditionally braided into beautiful edible garlands.</p>
@@ -718,6 +734,9 @@ Organic snacks from uttarakhand
       <div class="info-box">
         <h2 id="ingredients-title">Key Ingredients</h2>
         <p>100% natural, honest mountain ingredients under our Himalayan Bites purity label:</p>
+        <figure class="ingredient-image-wrapper">
+          <img src="assets/ghughuti-snack.jpg" alt="Golden Ghughuti snacks arranged in a traditional garland shape" width="1206" height="880" loading="lazy" decoding="async">
+        </figure>
         <ul>
           <li><span class="bullet-point">✦</span> <strong>Whole Wheat Flour (गेहूँ का आटा):</strong> Coarse, wholesome traditional grain rich in dietary fiber.</li>
           <li><span class="bullet-point">✦</span> <strong>Pure Mountain Jaggery (शुद्ध गुड़):</strong> Mineral-rich unrefined sweetener.</li>
