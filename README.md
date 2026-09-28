@@ -1,2 +1,2 @@
-# Himalayan-Bite-
-Organic snacks from uttarakhand 
+# HimalayanBite
+Organic snacks from uttarakhand
